@@ -56,6 +56,26 @@ main_page_head = '''
             top: 0;
             background-color: white;
         }
+
+        .g{
+            background-color: #EFF;
+            cursor: pointer;
+        }
+
+        .pg{
+            background-color: #EFE;
+            cursor: pointer;
+        }
+
+        .pg-13{
+            background-color: #FFC;
+            cursor: pointer;
+        }
+
+        .r{
+            background-color: #FFF0E0;
+            cursor: pointer;
+        }
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
@@ -122,7 +142,7 @@ main_page_content = '''
 
 # A single movie entry html template
 movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-4 movie-tile text-center {rating_class}" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
     <h2>{movie_title} ({rating})</h2>
     <h3>{year_released}</h3>
@@ -147,8 +167,9 @@ def create_movie_tiles_content(movies):
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
             trailer_youtube_id=trailer_youtube_id,
-            year_released=movie.getYearReleased(),
-            rating=movie.getRating()
+            year_released=movie.year,
+            rating=movie.rating,
+            rating_class=movie.rating.lower()
         )
     return content
 
